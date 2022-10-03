@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from os import environ
 
+from models import Todo
+
 app = Flask(__name__)
 
 load_dotenv()
