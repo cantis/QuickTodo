@@ -24,9 +24,14 @@ def create_app() -> Flask:
     db.init_app(app)
 
     from web.routes import home
+    from models import init_db
 
     # Register the blueprints
     app.register_blueprint(home.bp)
+
+    # Create the database tables
+    with app.app_context():
+        init_db()
 
     # Return the app instance
     return app

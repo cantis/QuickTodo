@@ -10,9 +10,9 @@ class Todo(db.Model):
     __tablename__ = 'todo'
     id = Column(Integer, primary_key=True)
     title = Column(String(100))
-    complete = Column(Integer, default=0)
-    date_created = Column(DateTime, default=datetime.utcnow)
+    is_complete = Column(Integer, default=0)
+    date_created = Column(DateTime, default=datetime.today())
 
 
-def init_db():
+def init_db() -> None:
     db.create_all()
