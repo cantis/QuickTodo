@@ -9,5 +9,4 @@ bp = Blueprint('home', __name__, template_folder='templates', static_folder='sta
 
 @bp.route('/')
 def index():
-    # return render_template('home/index.html')
-    return 'Hello World'
+    return render_template('home.html')

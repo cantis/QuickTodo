@@ -1,0 +1,32 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h2>Current Todo's</h2>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Title</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for todo in todo_list%}
+                        <tr>
+                            {% if todo.complete == False%}
+                                Not Complete
+                            {% else %}
+                                Complete
+                            {% endif%}
+                            <a href="/update/{{ todo.id }}" class="btn btn-primary">Update</a>
+                            <a href="/delete/{{ todo.id }}" class="btn btn-danger">Delete</a>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}
