@@ -1,11 +1,13 @@
-from sqlalchemy import Column, Integer, String
-from turtle import title
+from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
-from app import db
+from .app import db
 
-'''Represent a todo item'''
+
 class Todo(db.Model):
+    '''Represents a todo item'''
+
+    __tablename__ = 'todo'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
     complete = db.Column(db.Integer, default=0)
