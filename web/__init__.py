@@ -7,7 +7,7 @@ from os import environ
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app() -> Flask:
     '''Create Flask App and configure it'''
 
     # Create the Flask app
