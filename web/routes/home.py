@@ -13,4 +13,4 @@ bp = Blueprint('home', __name__, template_folder='templates', static_folder='sta
 @bp.route('/', methods=['GET'])
 def index():
     todo_list = db.session.query(Todo).all()
-    return render_template('home.html' todo_list=todo_list)
+    return render_template('home.html', todo_list=todo_list)

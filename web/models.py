@@ -1,4 +1,5 @@
 from sqlalchemy import Column, String, Integer, DateTime
+from sqlalchemy.orm import relationship
 from datetime import datetime
 
 from web import db
@@ -12,7 +13,16 @@ class Todo(db.Model):
     title = Column(String(100))
     is_complete = Column(Integer, default=0)
     date_created = Column(DateTime, default=datetime.today())
+    notes = relationship("Note", backref="todo")
 
 
-def init_db() -> None:
-    db.create_all()
+class Note(db.Model):
+    '''Represents a note'''
+
+    __tablename__ = 'note'
+    id = Column(Integer, primary_key=True)
+
+    title = Column(String(100))
+    content = Column(String(1000))
+    date_created = Column(DateTime, default=datetime.today())
+    todo_id = Column(Integer, db.ForeignKey('todo.id'))

@@ -23,15 +23,15 @@ def create_app() -> Flask:
     # Initialize the database
     db.init_app(app)
 
+    # Import parts of our application (add new blueprints and components here)
     from web.routes import home
-    from models import init_db
 
     # Register the blueprints
     app.register_blueprint(home.bp)
 
     # Create the database tables
     with app.app_context():
-        init_db()
+        db.create_all()
 
     # Return the app instance
     return app
