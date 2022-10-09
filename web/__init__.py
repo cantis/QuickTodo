@@ -9,6 +9,8 @@ db = SQLAlchemy()
 
 def create_app() -> Flask:
     '''Create Flask App and configure it'''
+    # This is called the create_app factory pattern you can read more about it here:
+    # https://flask.palletsprojects.com/en/2.2.x/patterns/appfactories/
 
     # Create the Flask app
     app = Flask(__name__)
@@ -23,7 +25,7 @@ def create_app() -> Flask:
     # Initialize the database
     db.init_app(app)
 
-    # Import parts of our application (add new blueprints and components here)
+    # Connect Routes
     from web.routes import home
 
     # Register the blueprints
