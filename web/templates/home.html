@@ -7,30 +7,60 @@
                 <h2>Current Todo's</h2>
             </div>
         </div>
+        <!-- Add Todo Form -->
+        <form action="/add" method="post">
+            <div class="row">
+                <div class="col-auto">
+                    <label for="todoTitle" class="form-label">Todo Title:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-auto">
+                    <input type="text" name="todoTitle" id="todoTitle" class="form-control ">
+
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="btn btn-primary btn-sm">Add Todo</button>
+                </div>
+            </div>
+        </form>
+        <hr>
+        <!-- List of Todo's -->
         <div class="row">
-            <div class="col">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Title</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for todo in todo_list%}
-                        <tr>
-                            <a href="/update/{{ todo.id }}" class="btn btn-primary">Update</a>
-                            <a href="/delete/{{ todo.id }}" class="btn btn-danger">Delete</a>
-                            {% if todo.complete == False%}
-                                Not Complete
-                            {% else %}
-                                Complete
-                            {% endif%}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div class="col-7">
+                <table class="table w-auto">
+                    <thead>
+                        <th class="col-1" scope="col">Id</th>
+                        <th class="col-2" scope="col">Title</th>
+                        <th class="col-auto" scope="col"></th>
+                    </thead>
+                    <tbody>
+                        {% for todo in todo_list%}
+                            <tr>
+                                <td class="text-start">{{ todo.id }}<td>
+                                <td class="text-start">{{ todo.title }}<td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    {% if todo.is_complete == False%}
+                                        <span class="badge rounded-pill text-bg-secondary">Not Complete</span>
+                                    {% else %}
+                                        <span class="badge rounded-pill text-bg-success">Complete</span>
+                                    {% endif%}
+                                </td>
+                                <td>
+                                    <a href="/update/{{ todo.id }}" class="btn btn-primary btn-sm">Update</a>
+                                </td>
+                                <td>
+                                    <a href="/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 {% endblock content %}

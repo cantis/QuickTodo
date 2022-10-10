@@ -9,7 +9,7 @@ db = SQLAlchemy()
 
 def create_app() -> Flask:
     '''Create Flask App and configure it'''
-    # This is called the create_app factory pattern you can read more about it here:
+    # Note, this app is set up in the create_app factory pattern you can read more about it here:
     # https://flask.palletsprojects.com/en/2.2.x/patterns/appfactories/
 
     # Create the Flask app
