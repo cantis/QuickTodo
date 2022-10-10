@@ -1,13 +1,13 @@
 {% extends "layout/base.html" %}
 
 {% block content %}
-    <div class="container">
+    <div class="container mt-3">
         <div class="row">
             <div class="col">
                 <h2>Current Todo's</h2>
             </div>
         </div>
-        <!-- Add Todo Form -->
+        <!-- Add Todo Item -->
         <form action="/add" method="post">
             <div class="row">
                 <div class="col-auto">
@@ -25,42 +25,46 @@
             </div>
         </form>
         <hr>
-        <!-- List of Todo's -->
-        <div class="row">
-            <div class="col-7">
-                <table class="table w-auto">
-                    <thead>
-                        <th class="col-1" scope="col">Id</th>
-                        <th class="col-2" scope="col">Title</th>
-                        <th class="col-auto" scope="col"></th>
-                    </thead>
-                    <tbody>
-                        {% for todo in todo_list%}
-                            <tr>
-                                <td class="text-start">{{ todo.id }}<td>
-                                <td class="text-start">{{ todo.title }}<td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    {% if todo.is_complete == False%}
-                                        <span class="badge rounded-pill text-bg-secondary">Not Complete</span>
-                                    {% else %}
-                                        <span class="badge rounded-pill text-bg-success">Complete</span>
-                                    {% endif%}
-                                </td>
-                                <td>
-                                    <a href="/update/{{ todo.id }}" class="btn btn-primary btn-sm">Update</a>
-                                </td>
-                                <td>
-                                    <a href="/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
+        <!-- Todo Item List -->
+        <div class="container text-start">
+            <div class="row">
+                <div class="col-1 fw-bold">
+                    Id
+                </div>
+                <div class="col-4 fw-bold">
+                    Title
+                </div>
+                <div class="col-3 fw-bold">
+                    Date Created
+                </div>
             </div>
+            {% for todo in todo_list %}
+                <div class="row">
+                    <div class="col-1">
+                        {{ todo.id }}
+                    </div>
+                    <div class="col-4">
+                        {{ todo.title }}
+                    </div>
+                    <div class="col-3">
+                        {{ todo.date_created.strftime('%Y-%m-%d') }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        {% if todo.is_complete == False%}
+                            <span class="badge rounded-pill text-bg-secondary">Incomplete</span>
+                        {% else %}
+                            <span class="badge rounded-pill text-bg-success">Complete</span>
+                        {% endif%}
+                    </div>
+                    <div class="col-4">
+                        <a href="/update/{{ todo.id }}" class="btn btn-primary btn-sm">Update</a>
+                        <a href="/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+                <div class="row">&nbsp;</div>
+            {% endfor %}
         </div>
-    </div>
 </div>
 {% endblock content %}
