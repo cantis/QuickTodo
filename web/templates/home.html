@@ -25,46 +25,50 @@
             </div>
         </form>
         <hr>
-        <!-- Todo Item List -->
-        <div class="container text-start">
+    </div>
+    <!-- Todo Item List -->
+    <div class="container mt-3 text-start">
+        <!-- List Headers -->
+        <div class="row">
+            <div class="col-1 fw-bold">
+                Id
+            </div>
+            <div class="col-4 fw-bold">
+                Title
+            </div>
+            <div class="col-3 fw-bold">
+                Date Created
+            </div>
+        </div>
+        <!-- ToDo Data -->
+        {% for todo in todo_list %}
             <div class="row">
-                <div class="col-1 fw-bold">
-                    Id
+                <div class="col-1">
+                    {{ todo.id }}
                 </div>
-                <div class="col-4 fw-bold">
-                    Title
+                <div class="col-4">
+                    {{ todo.title }}
                 </div>
-                <div class="col-3 fw-bold">
-                    Date Created
+                <div class="col-3">
+                    {{ todo.date_created.strftime('%Y-%m-%d') }}
                 </div>
             </div>
-            {% for todo in todo_list %}
-                <div class="row">
-                    <div class="col-1">
-                        {{ todo.id }}
-                    </div>
-                    <div class="col-4">
-                        {{ todo.title }}
-                    </div>
-                    <div class="col-3">
-                        {{ todo.date_created.strftime('%Y-%m-%d') }}
-                    </div>
+            <!-- Status and buttons  -->
+            <div class="row">
+                <div class="col-1">
+                    {% if todo.is_complete == False%}
+                        <span class="badge rounded-pill text-bg-secondary">Incomplete</span>
+                    {% else %}
+                        <span class="badge rounded-pill text-bg-success">Complete</span>
+                    {% endif%}
                 </div>
-                <div class="row">
-                    <div class="col-1">
-                        {% if todo.is_complete == False%}
-                            <span class="badge rounded-pill text-bg-secondary">Incomplete</span>
-                        {% else %}
-                            <span class="badge rounded-pill text-bg-success">Complete</span>
-                        {% endif%}
-                    </div>
-                    <div class="col-4">
-                        <a href="/update/{{ todo.id }}" class="btn btn-primary btn-sm">Update</a>
-                        <a href="/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
-                    </div>
+                <div class="col-4">
+                    <a href="/update/{{ todo.id }}" class="btn btn-primary btn-sm">Update</a>
+                    <a href="/delete/{{ todo.id }}" class="btn btn-danger btn-sm">Delete</a>
                 </div>
-                <div class="row">&nbsp;</div>
-            {% endfor %}
-        </div>
+            </div>
+            <div class="row">&nbsp;</div>
+        {% endfor %}
+    </div>
 </div>
 {% endblock content %}
